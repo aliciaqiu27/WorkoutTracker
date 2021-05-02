@@ -28,15 +28,12 @@ module.exports = function (app) {
     });
 
     // to get addExercise(data) from api.js
-    app.put("/api/workouts", (req, res) => {
-        WorkoutTracker.find({})
-            .then(data => {
-                res.json(data);
-            })
-            .catch(err => {
-                res.json(err);
-            });
-    });
+    // app.put("/api/workouts", ({body, params}, res) => {
+    //     WorkoutTracker.findByIdAndUpdate({
+    //     params.id,
+    //     {$push:{exercise:body}},
+    //     {new:true, runValidators: true}
+    // })
 
     // to get getWorkoutsInRange() from api.js
     app.get("/api/workouts", (req, res) => {
@@ -48,6 +45,5 @@ module.exports = function (app) {
                 res.json(err);
             });
     });
-    
-};
 
+}
