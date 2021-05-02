@@ -1,6 +1,53 @@
-// const path = require("path");
+const WorkoutTracker = require("../models");
 
-// //exporting a function that takes a parameter called app used in the body that defines the GET route. We're passing the express app in this function
-// app.get("/exercise", (req, res) => {
-//         res.sendFile(path.join(__dirname, "../public/exercise.html"))
-//     });
+const path = require("path");
+
+module.exports = function (app) {
+    // to get getLastWorkout() from api.js
+    app.get("/api/workouts", (req, res) => {
+        // res.sendFile(path.join(__dirname, "../public/exercise.html"))
+        WorkoutTracker.find()
+        .then(data => {
+            res.json(data);
+        })
+        .catch(err => {
+            res.json(err);
+        });
+    });
+
+
+    // to get createWorkout() from api.js
+    app.create("/api/workouts", (req, res) => {
+        WorkoutTracker.find()
+            .then(data => {
+                res.json(data);
+            })
+            .catch(err => {
+                res.json(err);
+            });
+    });
+
+    // to get addExercise(data) from api.js
+    app.put("/api/workouts", (req, res) => {
+        WorkoutTracker.find({})
+            .then(data => {
+                res.json(data);
+            })
+            .catch(err => {
+                res.json(err);
+            });
+    });
+
+    // to get getWorkoutsInRange() from api.js
+    app.get("/api/workouts", (req, res) => {
+        WorkoutTracker.find({})
+            .then(data => {
+                res.json(data);
+            })
+            .catch(err => {
+                res.json(err);
+            });
+    });
+    
+};
+
