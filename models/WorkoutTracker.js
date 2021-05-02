@@ -17,27 +17,39 @@ const WorkoutTrackerSchema = new Schema({
         trim: true,
       },
       duration: {
-        type: Integer,
+        type: Number,
         required: "Duration of exercise is required!",
       },
       weight: {
-        type: Integer,
+        type: Number,
         required: "Weight is required!",
       },
       reps: {
-        type: Integer,
+        type: Number,
         required: "Number of reps is required!",
       },
       sets: {
-        type: Integer,
+        type: Number,
         required: "Number of sets is required!",
       },
       distance: {
-        type: Integer,
+        type: Number,
       },
     },
   ],
+}, 
+{
+ toJSON: {
+   virtuals: true,
+ },
+},
+);
+
+//Virtual column in the duration. We're telling the duration the specific workout by summing the duration. Starting value is 0.
+WorkoutTrackerSchema.virtual("totalDuration").get(() => {
+  return this.exercise.reduce((total, exercise) => total + exercise.duration, 0);
 });
+
 
 const WorkoutTracker = mongoose.model("WorkoutTracker", WorkoutTrackerSchema);
 
